@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form validation</title>
 </head>
+
 <body>
     <h2 style="text-align: center;color:rgb(88, 17, 182);">Enter Your Details</h2>
-    
-    <fieldset id="Details_Form" class="formDiv">
+    <fieldset id="Details_Form">
         <label id="firstName">First Name:</label>
         <input type="text" id="txtFirstName" name="FirstName" /><span></span><br />
         <label>Middle Name:</label>
@@ -26,11 +23,39 @@
         <input type="number" id="txtPinCode" name="PinCode" /><span></span><br />
         <div>
             <input type="submit" value="Submit" onclick="submit()" style="margin-top: 10px; text-align: center; " />
-            <input type="button" value="Change Color" onclick="changeColor()"
-                style="margin-top: 10px; text-align: center;  " />
         </div>
     </fieldset>
-    <script>
+        <div>
+            <label for="bgColor">Background Color:</label>
+            <input type="text" class="js-bg-color" id="bgColor">
+        </div>
+        <div>
+            <label for="textColor">Text Color:</label>
+            <input type="text" class="js-text-color" id="textColor">
+        </div>
+        <div>
+            <label for="fontSize">Font Size:</label>
+            <input type="number" class="js-font-size" id="fontSize">
+        </div>
+        <script>
+
+            var bgColor = document.querySelector(".js-bg-color")
+            var textColor = document.querySelector(".js-text-color")
+            var fontSize = document.querySelector(".js-font-size")
+            var body = document.querySelector("body")
+
+            bgColor.addEventListener('keyup', function (event) {
+                body.style.backgroundColor = event.target.value
+            })
+
+            textColor.addEventListener('keyup', function (event) {
+                body.style.color = event.target.value
+            })
+
+            fontSize.addEventListener('keyup', function (event) {
+                body.style.fontSize = event.target.value + 'px'
+            })
+    
         function submit() {
             if (document.getElementById('txtFirstName').value == "") {
                 alert('Please Enter First Name');
@@ -45,6 +70,10 @@
                 alert('Please Enter City');
                 document.getElementById('txtCity').focus();
 
+            }
+            else if (document.getElementById('txtDoB').value=="") {
+                alert('Please Enter Correct Dob');
+                document.getElementById('txtDoB').focus();    
             }
             else if (document.getElementById('txtPinCode').value == "") {
                 alert('Please Enter Pin Code');
@@ -63,13 +92,6 @@
             }
             return false;
         };
-
-        function isNumber(evt) { evt = (evt) ? evt : window.event; var charCode = (evt.which) ? evt.which : evt.keyCode; if (charCode > 31 && (charCode < 48 || charCode > 57)) { return false; } return true; }
-
-        function changeColor() { var frm = document.getElementById('Details_Form'); 
-            if (frm.style.backgroundColor == 'green') 
-                    frm.style.backgroundColor = 'white'; 
-                else frm.style.backgroundColor = '#FF6037'; }
     </script>
 
 </body>
